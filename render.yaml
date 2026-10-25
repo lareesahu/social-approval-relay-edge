@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: social-approval-relay-edge
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r relay/requirements.txt && python fetch_media.py
+    startCommand: python relay/app.py
+    healthCheckPath: /health
+    envVars:
+      - key: RELAY_SECRET
+        sync: false
+      - key: GH_TOKEN
+        sync: false
